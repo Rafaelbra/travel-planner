@@ -26,7 +26,8 @@ const Navbar = () => {
                         Globe
                     </Link>
 
-                    <button className="flex items-center justify-center bg-gray-800 hover:bg-gray-900 text-white p-2 rounded-sm cursor-pointer" onClick={login}>
+                    <button className="flex items-center justify-center bg-gray-800 hover:bg-gray-900 text-white p-2 rounded-sm cursor-pointer" 
+                    onClick={login}>
                         Sign In
                         <svg
                             className="w-6 h-6 ml-2"
