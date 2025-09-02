@@ -34,5 +34,14 @@ export async function createTrip(formData: FormData) {
     },
   });
 
+  console.log({
+  title,
+  description,
+  imageUrl,
+  startDateStr,
+  endDateStr,
+});
+
   redirect("/trips");
 }
+
