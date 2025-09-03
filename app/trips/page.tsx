@@ -56,6 +56,34 @@ export default async function TripsPage() {
                         }`}
                     </p>
                 </CardContent>
+
+                <div>
+                    <h2 className="text-xl font-semibold mb-4"> Your recent trips</h2>
+                    {trips.length === 0 ? (
+                        <Card>
+                            <CardContent className="flex flex-col items-center justify-center py-8">
+                                <h3 className="text-xl font-medium mb-2"> No trips yet.</h3>
+                                <p className="text-center mb-4 max-w-md">Start planning your avdenture by creating your first trip.</p>
+                                <Link href="/trips/new">
+                                 <Button>Create trip</Button>
+                                </Link>
+                            </CardContent>
+                        </Card>
+                    ) : (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {sortedTrips.slice(0, 6).map((trip, key) => (
+                                <Link key={key} href={""}>
+                                    <Card className="h-full hover:shadow-md transition-shadow">
+                                        <CardHeader>
+                                            <CardTitle className="line-clamp-1">{trip.title}</CardTitle>
+                                        </CardHeader>
+                                    </Card>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+
+                </div>
             </Card>
         </div>
     );
