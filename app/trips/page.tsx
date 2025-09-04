@@ -56,7 +56,7 @@ export default async function TripsPage() {
                         }`}
                     </p>
                 </CardContent>
-
+            </Card>
                 <div>
                     <h2 className="text-xl font-semibold mb-4"> Your recent trips</h2>
                     {trips.length === 0 ? (
@@ -77,6 +77,15 @@ export default async function TripsPage() {
                                         <CardHeader>
                                             <CardTitle className="line-clamp-1">{trip.title}</CardTitle>
                                         </CardHeader>
+
+                                        <CardContent>
+                                            <p className="text-sm line-clamp-2 mb-2"> {trip.description}</p>
+                                            <div className="text-sm"> 
+                                                {" "}
+                                                {new Date(trip.startDate).toLocaleDateString() } - {" "}
+                                                {new Date(trip.endDate).toLocaleDateString()  }
+                                            </div>
+                                        </CardContent>
                                     </Card>
                                 </Link>
                             ))}
@@ -84,7 +93,7 @@ export default async function TripsPage() {
                     )}
 
                 </div>
-            </Card>
+            
         </div>
     );
 }
