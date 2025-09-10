@@ -5,6 +5,8 @@ import Image from "next/image"
 import {Calendar, Plus, PlusIcon} from 'lucide-react'
 import Link from "next/link"
 import { Button } from "./ui/button"
+import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
+import { useState } from "react"
 
 
 interface TripDetailClientProps{
@@ -12,6 +14,7 @@ interface TripDetailClientProps{
 }
 
 export default function TripDetailClient({ trip }: TripDetailClientProps) {
+    const [activeTab, setActiveTab] = useState("overview");
 
     return (
         <div className="container mx-auto px-4 py-8 space-y-8">
@@ -49,6 +52,16 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                         </Link>
                     </div>
                 </div>
+
+                <div className="bg-white p-6 shadow rounded-lg">
+                    <Tabs value={activeTab} onValueChange={setActiveTab}>
+                        <TabsList className="mb-6">
+                            <TabsTrigger value="overview" className="text-lg"> Overview</TabsTrigger>
+                            <TabsTrigger value="itinenary" className="text-lg"> Itinerary</TabsTrigger>
+                            <TabsTrigger value="map" className="text-lg"> Map</TabsTrigger>
+                        </TabsList>
+                    </Tabs>
+                </div>
         </div>
-    )
+    );
 }
