@@ -1,17 +1,21 @@
 "use client"
 
-import { Trip } from "@prisma/client"
+import { Location, Trip } from "@prisma/client"
 import Image from "next/image"
-import {Calendar, Plus, PlusIcon} from 'lucide-react'
+import {Calendar, MapPin, Plus, PlusIcon} from 'lucide-react'
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
 import { useState } from "react"
 import { TabsContent } from "@radix-ui/react-tabs"
+import Map from "./map"
 
+export type TripWithLocation = Trip & {
+    locations: Location[];
+}
 
 interface TripDetailClientProps{
-    trip: Trip
+    trip: TripWithLocation;
 }
 
 export default function TripDetailClient({ trip }: TripDetailClientProps) {
@@ -81,7 +85,17 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                                                 </p>
                                             </div>
                                         </div>
+                                        <div className="flex items-start">
+                                            <MapPin className="h-6 w-6 mr-3 text-gray-500" />
+                                            <div>
+                                                <p> Destinations</p>
+                                                <p> {trip.locations.length} {trip.locations.length === 1 ? "location" : "locations"}</p>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div className="h-72 rounded-lg overflow-hidden shadow">
+                                    <Map itinenaries={trip.locations} />
                                 </div>
                             </div>
                         </TabsContent>
