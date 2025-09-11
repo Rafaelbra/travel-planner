@@ -48,7 +48,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                     <div className="mt-4 md:mt-0">
                         <Link href={`/trips/${trip.id}/itinerary/new`}>
                             <Button>
-                                <PlusIcon className="mr-1 h-3 w-3"/> Add a location
+                                <PlusIcon /> Add a location
                             </Button>
                         </Link>
                     </div>
@@ -77,7 +77,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                                                     <br />
                                                     {`${Math.round(
                                                         (trip.endDate.getTime() - trip.startDate.getTime()) / (1000 * 60 * 60 * 24)
-                                                        )} days(s)`}
+                                                        )} day(s)`}
                                                 </p>
                                             </div>
                                         </div>
