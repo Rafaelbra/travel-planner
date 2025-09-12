@@ -21,12 +21,14 @@ export default function Map({ itinenaries } : MapProps) {
     };
 
     const center = itinenaries.length > 0 
-     ? {lat: itinenaries[0].lat, lng: itinenaries[0],lng} 
+     ? {lat: itinenaries[0].lat, lng: itinenaries[0].lng} 
      : {lat: 0, lng: 0};
 
     return (
         <GoogleMap mapContainerStyle={{width: "100%", height: "100%"}} zoom={8} center={center} >
-
+            {itinenaries.map((location, key) => (
+                <Marker key={key} position={{lat: location.lat, lng: location.lng}} title={location.locationTitle} />
+            ))}
         </GoogleMap>
     );
 };
