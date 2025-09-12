@@ -20,9 +20,13 @@ export default function Map({ itinenaries } : MapProps) {
         return <div> Loading maps...</div>
     };
 
+    const center = itinenaries.length > 0 
+     ? {lat: itinenaries[0].lat, lng: itinenaries[0],lng} 
+     : {lat: 0, lng: 0};
+
     return (
-        <GoogleMap mapContainerStyle={{width: "100%", height: "100%"}}>
+        <GoogleMap mapContainerStyle={{width: "100%", height: "100%"}} zoom={8} center={center} >
 
         </GoogleMap>
-    )
+    );
 };
