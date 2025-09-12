@@ -12,7 +12,14 @@ interface SortableItinareryProps {
 function SortableItem({item}: {item: Location}) {
     return (
         <div className="p-4 border rounded-md justify-between items-center hover:shadow transition-shadow">
-            {item.locationTitle}
+            <div>
+                <h4 className="font-medium text-gray-800 ">
+                    {item.locationTitle}
+                </h4>
+                <p className="text-sm text-gray-500 truncate max-w-xs">
+                    {`Latitude: ${item.lat}, Longitude: ${item.lng}`}
+                </p>
+            </div>
         </div>
     )
 }
