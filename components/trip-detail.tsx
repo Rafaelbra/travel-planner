@@ -120,7 +120,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                                 
                             </div>
 
-                            {trip.locations.length === 0 && (
+                            {trip.locations.length === 0 ? (
                                 <div className="text-center p-4">
                                     <p> Add locations to see them on the itinerary.</p>
                                     <Link href={`/trips/${trip.id}/itinerary/new`}>
