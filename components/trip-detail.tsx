@@ -9,6 +9,7 @@ import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
 import { useState } from "react"
 import { TabsContent } from "@radix-ui/react-tabs"
 import Map from "./map"
+import SortableItinerary from "./sortable-itinerary"
 
 export type TripWithLocation = Trip & {
     locations: Location[];
@@ -62,7 +63,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                     <Tabs value={activeTab} onValueChange={setActiveTab}>
                         <TabsList className="mb-6">
                             <TabsTrigger value="overview" className="text-lg"> Overview</TabsTrigger>
-                            <TabsTrigger value="itinenary" className="text-lg"> Itinerary</TabsTrigger>
+                            <TabsTrigger value="itinerary" className="text-lg"> Itinerary</TabsTrigger>
                             <TabsTrigger value="map" className="text-lg"> Map</TabsTrigger>
                         </TabsList>
 
@@ -97,9 +98,41 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                                 <div className="h-72 rounded-lg overflow-hidden shadow">
                                     <Map itinenaries={trip.locations} />
                                 </div>
+                                {trip.locations.length === 0 && (
+                                    <div className="text-center p-4">
+                                        <p> Add locations to see them on the map.</p>
+                                        <Link href={`/trips/${trip.id}/itinerary/new`}>
+                                         <Button>
+                                            <PlusIcon /> Add a location
+                                         </Button>
+                                        </Link>
+                                    </div>
+                                )}
+                                <div>
+                                    <p className="text-gray-600 leading-relaxed">{trip.description}</p>
+                                </div>
                             </div>
                         </TabsContent>
 
+                        <TabsContent value="itinerary" className="space-y-6">
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl font-semibold"> Full Itinerary</h2>
+                                
+                            </div>
+
+                            {trip.locations.length === 0 && (
+                                <div className="text-center p-4">
+                                    <p> Add locations to see them on the itinerary.</p>
+                                    <Link href={`/trips/${trip.id}/itinerary/new`}>
+                                        <Button>
+                                            <PlusIcon /> Add a location
+                                        </Button>
+                                    </Link>
+                                </div>
+                            ) : (
+                                <SortableItinerary locations={trip.locations} tripId={trip.id} />
+                            )}
+                        </TabsContent>
                     </Tabs>
                 </div>
         </div>
