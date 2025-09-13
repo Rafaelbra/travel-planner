@@ -40,8 +40,17 @@ export default function SortableItinerary({locations, tripId}: SortableItinarery
     const id = useId();
     const [localLocation, setLocalLocation] = useState(locations); 
     
-    const handleDragEnd = async (event: DragEvent) => {
-        
+    const handleDragEnd = async (event: DragEndEvent) => {
+        const { active, over } = event;
+
+        if (active.id !== over?.id) {
+            const oldIndex = localLocation.findIndex((item) => item.id === active.id);
+            const newIndex = localLocation.findIndex((item) => item.id === over!.id);
+
+            const newLocationsOrder = arrayMove(localLocation, oldIndex, newIndex).map((item, index) => ({...item, order: index}));
+
+            setLocalLocation(newLocationsOrder);
+        }
     };
 
     return (
