@@ -3,6 +3,7 @@ import {DndContext, closestCenter, DragEndEvent} from "@dnd-kit/core";
 import {arrayMove, SortableContext, verticalListSortingStrategy, useSortable} from "@dnd-kit/sortable";
 import { useId, useState } from "react";
 import { CSS } from "@dnd-kit/utilities";
+import { reorderItinerary } from "@/lib/actions/reorder-itinerary";
 
 
 interface SortableItinareryProps {
@@ -50,6 +51,8 @@ export default function SortableItinerary({locations, tripId}: SortableItinarery
             const newLocationsOrder = arrayMove(localLocation, oldIndex, newIndex).map((item, index) => ({...item, order: index}));
 
             setLocalLocation(newLocationsOrder);
+
+            await reorderItinerary(tripId, newLocationsOrder.map((item) => item.id));
         }
     };
 
