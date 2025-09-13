@@ -2,6 +2,7 @@ import { Location } from "@prisma/client";
 import {DndContext, closestCenter, DragEndEvent} from "@dnd-kit/core";
 import {arrayMove, SortableContext, verticalListSortingStrategy, useSortable} from "@dnd-kit/sortable";
 import { useId, useState } from "react";
+import { CSS } from "@dnd-kit/utilities";
 
 
 interface SortableItinareryProps {
@@ -10,8 +11,16 @@ interface SortableItinareryProps {
 }
 
 function SortableItem({item}: {item: Location}) {
+    const {attributes, listeners, setNodeRef, transform, transition} = useSortable({id: item.id});
+
     return (
-        <div className="p-4 border rounded-md justify-between items-center hover:shadow transition-shadow">
+        <div
+            ref={setNodeRef}
+            {... attributes}
+            {...listeners}
+            style={{transform: CSS.Transform.toString(transform), transition}}
+        
+        className="p-4 border rounded-md justify-between items-center hover:shadow transition-shadow">
             <div>
                 <h4 className="font-medium text-gray-800 ">
                     {item.locationTitle}
@@ -19,6 +28,9 @@ function SortableItem({item}: {item: Location}) {
                 <p className="text-sm text-gray-500 truncate max-w-xs">
                     {`Latitude: ${item.lat}, Longitude: ${item.lng}`}
                 </p>
+            </div>
+            <div className="text-sm text-gray-600">
+                Day {item.order}
             </div>
         </div>
     )
@@ -29,7 +41,7 @@ export default function SortableItinerary({locations, tripId}: SortableItinarery
     const [localLocation, setLocalLocation] = useState(locations); 
     
     const handleDragEnd = async (event: DragEvent) => {
-
+        
     };
 
     return (
