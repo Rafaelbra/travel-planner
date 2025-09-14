@@ -1,10 +1,16 @@
 "use client";
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
 
 export default function GlobePage() {
     const globeRef = useRef<GlobeMethods | undefined>(undefined);
+
+    useEffect(() => {
+        if(globeRef.current) {
+            globeRef.current.controls().autoRotate = true;
+        }
+    }, []);
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
