@@ -31,7 +31,7 @@ function SortableItem({item}: {item: Location}) {
                 </p>
             </div>
             <div className="text-sm text-gray-600">
-                Day {item.order}
+                Day {item.order +1}
             </div>
         </div>
     )
