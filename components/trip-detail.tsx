@@ -133,7 +133,33 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                                 <SortableItinerary locations={trip.locations} tripId={trip.id} />
                             )}
                         </TabsContent>
+
+                        <TabsContent value="map" className="space-y-6 ">
+
+                                <div className="h-72 rounded-lg overflow-hidden shadow">
+                                    <Map itinenaries={trip.locations} />
+                                </div>
+                                {trip.locations.length === 0 && (
+                                    <div className="text-center p-4">
+                                        <p> Add locations to see them on the map.</p>
+                                        <Link href={`/trips/${trip.id}/itinerary/new`}>
+                                         <Button>
+                                            <PlusIcon /> Add a location
+                                         </Button>
+                                        </Link>
+                                    </div>
+                                )}
+                        </TabsContent>
+
+                        
                     </Tabs>
+                </div>
+                <div className="text-center">
+                    <Link href={`/trips`}>
+                         <Button>
+                           Back to trips
+                        </Button>
+                    </Link>
                 </div>
         </div>
     );
