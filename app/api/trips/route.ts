@@ -40,7 +40,9 @@ export async function GET() {
         };
     }));
 
-    } catch (err) {
+    return NextResponse.json(transformedLocations);
 
+    } catch (err) {
+        return new NextResponse("Internal Error", { status: 500});
     }
 }
