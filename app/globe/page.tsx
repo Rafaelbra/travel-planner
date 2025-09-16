@@ -59,7 +59,11 @@ export default function GlobePage() {
                                 <h2 className="text-2xl font-semibold mb-4"> See where you've been...</h2>
                                 <div className="h-[600px] w-full relative">
                                    {isLoading ? (
-                                    <div className='flex items-center justify-center h-full'></div>
+                                    <div className='flex items-center justify-center h-full'>
+                                        <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900'>
+                                            {" "}
+                                        </div>
+                                    </div>
                                         ) : (
                                         <Globe
                                     ref={globeRef}
