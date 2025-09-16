@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import { getCountryFromCoordinates } from "@/lib/actions/geocode";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { useEffect, useState } from "react"
 
 export async function GET() {
     try {

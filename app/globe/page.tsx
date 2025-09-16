@@ -1,10 +1,35 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
+
+export interface TransformedLocation {
+    lat: number;
+    lng: number;
+    name: string;
+    country: string
+}
 
 export default function GlobePage() {
     const globeRef = useRef<GlobeMethods | undefined>(undefined);
+
+    const [visitedCountries, setVisitedCountries] = useState<Set<string>>(
+        new Set()
+    );
+
+    useEffect(() => {
+        const fetchLocations = async () => {
+            try {
+                const response = await fetch("api/trips/locations")
+                const data = await response.json()
+
+                const countries = new Set<string>(data.map((loc: TransformedLocation) => loc.country))
+            } catch (err) {
+
+            }
+        }
+        fetchLocations();
+    });
 
     useEffect(() => {
         if(globeRef.current) {
