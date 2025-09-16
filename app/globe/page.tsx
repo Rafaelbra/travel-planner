@@ -1,5 +1,6 @@
 "use client";
 
+import { error } from 'console';
 import { useEffect, useRef, useState } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
 
@@ -17,19 +18,28 @@ export default function GlobePage() {
         new Set()
     );
 
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         const fetchLocations = async () => {
             try {
                 const response = await fetch("api/trips/locations")
                 const data = await response.json()
 
-                const countries = new Set<string>(data.map((loc: TransformedLocation) => loc.country))
-            } catch (err) {
+                const countries = new Set<string>(
+                    data.map((loc: TransformedLocation) => loc.country)
+                );
 
+                setVisitedCountries(countries);
+
+            } catch (err) {
+                console.error("error", error)
+            } finally {
+                setIsLoading(false);
             }
         }
         fetchLocations();
-    });
+    }, []);
 
     useEffect(() => {
         if(globeRef.current) {
@@ -48,7 +58,10 @@ export default function GlobePage() {
                             <div className="p-6">
                                 <h2 className="text-2xl font-semibold mb-4"> See where you've been...</h2>
                                 <div className="h-[600px] w-full relative">
-                                    <Globe
+                                   {isLoading ? (
+                                    <div className='flex items-center justify-center h-full'></div>
+                                        ) : (
+                                        <Globe
                                     ref={globeRef}
                                     globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
                                     bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
@@ -61,6 +74,7 @@ export default function GlobePage() {
                                     width={800}
                                     height={600}
                                     />
+                                    )}
                                 </div>
                             </div>
                         </div>
