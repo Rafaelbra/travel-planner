@@ -13,12 +13,13 @@ export async function getCountryFromCoordinates(lat: number, lng: number): Promi
     const data = await response.json()
 
     const result = data.results[0]
-    const countryComponent = result.address_components.find((component: any) => 
-        component.types.includes("country")
+
+    const countryComponent = result.address_components.find((component: { types: string[]; long_name: string }) => 
+    component.types.includes("country")
     );
 
     return ({
-        country: countryComponent.long_name || "Unknown" ,
+        country: countryComponent?.long_name || "Unknown",
         formattedAddress: result.formatted_address,
     })
 }
