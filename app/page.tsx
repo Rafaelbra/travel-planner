@@ -1,6 +1,7 @@
 import React from "react";
 import { Map as MapIcon } from "lucide-react";
 import { auth } from "@/auth";
+import AuthButton from "@/components/auth-button";
 
 export default async function LandingPage() {
   const session = await auth();
