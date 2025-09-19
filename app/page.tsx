@@ -123,7 +123,7 @@ export default async function LandingPage() {
             </h2>
             <p className="text-xl text-blue-50 mb-8 max-w-2xl mx-auto">
               Join thousands of travelers who plan better trips with
-              TripPlanner.
+              TrailWise.
             </p>
             <AuthButton
               isLoggedIn={isLoggedIn}
