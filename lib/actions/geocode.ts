@@ -12,7 +12,7 @@ export async function getCountryFromCoordinates(lat: number, lng: number): Promi
 
     const data = await response.json()
 
-    const result = data.result[0]
+    const result = data.results[0]
     const countryComponent = result.address_components.find((component: any) => 
         component.types.includes("country")
     );

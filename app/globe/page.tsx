@@ -23,7 +23,7 @@ export default function GlobePage() {
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const response = await fetch("api/trips/locations")
+                const response = await fetch("api/trips")
                 const data = await response.json()
 
                 const countries = new Set<string>(
@@ -98,7 +98,7 @@ export default function GlobePage() {
                                         ) : (
                                         <div className='space-y-4'>
                                             <div className='bg-blue-50 p-4 rounded-lg'>
-                                                <p> You've visited <span> {visitedCountries.size}</span></p>
+                                                <p className='text-sm text-blue-800'> You've visited <span className='font-bold'> {visitedCountries.size}</span></p>
                                             </div>
                                         </div>
                                     )}
