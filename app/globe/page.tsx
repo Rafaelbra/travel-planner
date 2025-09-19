@@ -1,6 +1,6 @@
 "use client";
 
-import { error } from 'console';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useEffect, useRef, useState } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
 
@@ -33,7 +33,7 @@ export default function GlobePage() {
                 setVisitedCountries(countries);
 
             } catch (err) {
-                console.error("error", error)
+                console.error("error", err)
             } finally {
                 setIsLoading(false);
             }
@@ -54,7 +54,7 @@ export default function GlobePage() {
                 <div className="max-w-7xl mx-auto ">
                     <h1 className="text-center text-4xl font-bold mb-12"> Your Travel Journey</h1>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                        <div className="lg:cols-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
                             <div className="p-6">
                                 <h2 className="text-2xl font-semibold mb-4"> See where you've been...</h2>
                                 <div className="h-[600px] w-full relative">
@@ -81,6 +81,29 @@ export default function GlobePage() {
                                     )}
                                 </div>
                             </div>
+                        </div>
+
+                        <div className='lg:col-span-1'>
+                            <Card className='sticky top-8'>
+                                <CardHeader>
+                                    <CardTitle> Countries visited</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    {isLoading ? (
+                                    <div className='flex items-center justify-center h-full'>
+                                        <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900'>
+                                            {" "}
+                                        </div>
+                                    </div>
+                                        ) : (
+                                        <div className='space-y-4'>
+                                            <div className='bg-blue-50 p-4 rounded-lg'>
+                                                <p> You've visited <span> {visitedCountries.size}</span></p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </CardContent>
+                            </Card>
                         </div>
                     </div>
                 </div>
