@@ -19,13 +19,17 @@ export default function GlobePage() {
         new Set()
     );
 
+    const [locations, setLocations] = useState<TransformedLocation[]>([]);
+
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const response = await fetch("api/trips")
-                const data = await response.json()
+                const response = await fetch("api/trips");
+                const data = await response.json();
+
+                setLocations(data);
 
                 const countries = new Set<string>(
                     data.map((loc: TransformedLocation) => loc.country)
@@ -74,6 +78,7 @@ export default function GlobePage() {
                                     pointColor={() => "#FF5733"}
                                     pointLabel="name"
                                     pointRadius={0.5}
+                                    pointsData={locations}
                                     pointAltitude={0.1}
                                     pointsMerge={true}
                                     width={800}
@@ -102,8 +107,8 @@ export default function GlobePage() {
                                                 <p className='text-sm text-blue-800'> You've visited <span className='font-bold'> {visitedCountries.size}</span>{" "}countries.</p>
                                             </div>
                                             <div className='space-y-2 max-h[500px] overflow-y-auto pr-2'>
-                                                {Array.from(visitedCountries).sort().map((country) => (
-                                                    <div>
+                                                {Array.from(visitedCountries).sort().map((country, key) => (
+                                                    <div key={key} className='flex items-center gap-2 p-3 rounded-lg hover: bg-gray-50 transition-colors border border-gray-100'>
                                                         <MapPin />
                                                         <span>{country}</span>
                                                     </div>
