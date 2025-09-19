@@ -61,7 +61,7 @@ export default function GlobePage() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                         <div className="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
                             <div className="p-6">
-                                <h2 className="text-2xl font-semibold mb-4"> See where you've been...</h2>
+                                <h2 className="text-2xl font-semibold mb-4"> See where you have been...</h2>
                                 <div className="h-[600px] w-full relative">
                                    {isLoading ? (
                                     <div className='flex items-center justify-center h-full'>
@@ -104,7 +104,7 @@ export default function GlobePage() {
                                         ) : (
                                         <div className='space-y-4'>
                                             <div className='bg-blue-50 p-4 rounded-lg'>
-                                                <p className='text-sm text-blue-800'> You've visited <span className='font-bold'> {visitedCountries.size}</span>{" "}countries.</p>
+                                                <p className='text-sm text-blue-800'> You have visited <span className='font-bold'> {visitedCountries.size}</span>{" "}countries.</p>
                                             </div>
                                             <div className='space-y-2 max-h[500px] overflow-y-auto pr-2'>
                                                 {Array.from(visitedCountries).sort().map((country, key) => (

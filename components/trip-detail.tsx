@@ -2,7 +2,7 @@
 
 import { Location, Trip } from "@prisma/client"
 import Image from "next/image"
-import {Calendar, MapPin, Plus, PlusIcon} from 'lucide-react'
+import {Calendar, MapPin, PlusIcon} from 'lucide-react'
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
