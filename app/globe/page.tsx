@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MapPin } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
 
@@ -98,7 +99,15 @@ export default function GlobePage() {
                                         ) : (
                                         <div className='space-y-4'>
                                             <div className='bg-blue-50 p-4 rounded-lg'>
-                                                <p className='text-sm text-blue-800'> You've visited <span className='font-bold'> {visitedCountries.size}</span></p>
+                                                <p className='text-sm text-blue-800'> You've visited <span className='font-bold'> {visitedCountries.size}</span>{" "}countries.</p>
+                                            </div>
+                                            <div className='space-y-2 max-h[500px] overflow-y-auto pr-2'>
+                                                {Array.from(visitedCountries).sort().map((country) => (
+                                                    <div>
+                                                        <MapPin />
+                                                        <span>{country}</span>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     )}
